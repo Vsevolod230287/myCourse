@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace myCourse
@@ -13,7 +14,7 @@ namespace myCourse
    {
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddMvc();
+         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
       }
 
       public void Configure(IApplicationBuilder app, IHostingEnvironment env)
