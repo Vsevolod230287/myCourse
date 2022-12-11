@@ -8,5 +8,5 @@
       "**/*.cshtml"
    ],
    "fontAwesomeAutocomplete.triggerWord": "f-",
-    "fontAwesomeAutocomplete.preview.backgroundColor": "#ffffff",
+   "fontAwesomeAutocomplete.preview.backgroundColor": "#ffffff",
 }
