@@ -35,16 +35,37 @@ namespace myCourse
             // services.AddTransient<ICourseService, AdoNetCourseService>();
             services.AddTransient<ICourseService, EfCoreCourseService>();
             services.AddTransient<IDatabaseAccessor, SQLiteDatabaseAccessor>();
-            services.AddTransient<ICashedCourseService, MemoryCacheCourseService>();
+            // services.AddTransient<ICashedCourseService, MemoryCacheCourseService>();
+            services.AddTransient<ICashedCourseService, DistributedCacheCourseService>();
             // services.AddScoped<MyCourceDbContext>();
             // services.AddDbContext<MyCourceDbContext>();
+
             services.AddDbContextPool<MyCourceDbContext>(optionsBuilder =>
             {
                 string connectionString = Configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
                 optionsBuilder.UseSqlite(connectionString);
             });
 
+            #region Configurazione del servizio di cache distribuita
 
+            // installare Redis
+            // instalare pacchetto NuGet: Microsoft.Extension.Caching.StackExchangeRedis
+            // services.AddStackExcangeRedisCache(options =>
+            // {
+            //     Configuration.Bind("DistributedCache:Redis", options);
+            // });
+
+
+            //se vogliamo usare sql-server, per preparare la tabella usata per la cache cercare rete aspnetcore sql-server-cache
+            // services.AddDistributedSqlServerCache(options =>
+            // {
+            //     Configuration.Bind("DistributedCache:SqlServer", options);
+            // });
+
+
+            //se vogliamo usare la memoria mentre siamo in svillupo
+            // services.AddDistributedMemoryCache();
+            #endregion
 
             //Options
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
